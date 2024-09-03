@@ -29,13 +29,15 @@ yargs(hideBin(process.argv)).command(
                             })
 }, (argv) => {
               commitRepo(argv.message)
-}).command("push", "Push commits to S3", {}, pushRepo).command("pull", "Pull commits from S3", {}, pullRepo).command("revert<commitID", "Revert to a specific commit", (yargs) => {
+}).command("push", "Push commits to S3", {}, pushRepo).command("pull", "Pull commits from S3", {}, pullRepo).command("revert <commitID>", "Revert to a specific commit", (yargs) => {
               yargs.positional("commitID",
                             {
                                           describe: "CommitID to revert to",
                                           type: "string"
                             })
 },
-              revertRepo
+              (argv) => {
+                            revertRepo(argv.commitID)
+              }
 
 ).demandCommand(1, "You need at east one command").help().argv;
