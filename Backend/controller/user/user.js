@@ -326,6 +326,7 @@ const signup = async (req, res) => {
                             res.json({
                                           token,
                                           newUser,
+                                          userId: result.insertedId,
                             });
               } catch (error) {
                             console.error("Error occurred:", error.message);
